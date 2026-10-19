@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+import os
 import uvicorn
 import numpy as np
 from io import BytesIO
@@ -8,9 +9,18 @@ import tensorflow as tf
 
 app = FastAPI()
 
+# Keep local Vite development enabled. Add the exact deployed frontend origin
+# to FRONTEND_ORIGINS on Render when it is available (comma-separated if needed).
+frontend_origins = ["http://localhost:5173"]
+frontend_origins.extend(
+    origin.strip().rstrip("/")
+    for origin in os.getenv("FRONTEND_ORIGINS", "").split(",")
+    if origin.strip()
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=frontend_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],

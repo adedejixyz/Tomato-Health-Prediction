@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 
 function LeafMark() {
   return <span className="leaf-mark" aria-hidden="true">✳</span>;
@@ -36,6 +36,10 @@ function App() {
 
   async function analyse() {
     if (!file || loading) return;
+    if (!API_URL) {
+      setError('The prediction API URL is not configured. Set VITE_API_URL and restart the frontend.');
+      return;
+    }
     setLoading(true);
     setError('');
     setResult(null);
