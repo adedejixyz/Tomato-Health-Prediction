@@ -9,9 +9,12 @@ import tensorflow as tf
 
 app = FastAPI()
 
-# Keep local Vite development enabled. Add the exact deployed frontend origin
-# to FRONTEND_ORIGINS on Render when it is available (comma-separated if needed).
-frontend_origins = ["http://localhost:5173"]
+# Allow the local Vite app and the deployed Vercel frontend. Additional origins
+# can be supplied through FRONTEND_ORIGINS on Render (comma-separated).
+frontend_origins = [
+    "http://localhost:5173",
+    "https://tomato-health-prediction.vercel.app",
+]
 frontend_origins.extend(
     origin.strip().rstrip("/")
     for origin in os.getenv("FRONTEND_ORIGINS", "").split(",")
