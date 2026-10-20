@@ -10,7 +10,7 @@ A full-stack tomato leaf image classifier. Upload a leaf photo in the web app to
 - **Prediction API:** [Render service](https://tomato-health-prediction.onrender.com)
 - **API health check:** [GET /ping](https://tomato-health-prediction.onrender.com/ping)
 
-The frontend uses the Render API URL as its default. For a different API deployment, set `VITE_API_URL` in the frontend environment and rebuild/redeploy.
+
 
 ## Features
 
